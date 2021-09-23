@@ -3,13 +3,22 @@ package guayacos;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Collections;
+
 @SpringBootApplication
 public class UmatchingApp
 {
     public static void main( String[] args )
     {
-        SpringApplication.run(UmatchingApp.class,args);
-        System.out.println("The app is running...");
+        SpringApplication app = new SpringApplication(UmatchingApp.class);
+        app.setDefaultProperties(Collections.singletonMap("server.port",getPort()));
+        app.run(args);
 
+    }
+    private static int getPort() {
+        if (System.getenv("PORT") != null) {
+            return Integer.parseInt(System.getenv("PORT"));
+        }
+        return 4567;
     }
 }

@@ -2,9 +2,8 @@ package guayacos.dto;
 
 public class LoginDto {
 
-    String email;
-
-    String password;
+    public String email;
+    public String password;
     public LoginDto( )
     {
 

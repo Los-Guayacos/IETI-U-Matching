@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceMongoDB implements UserService {
@@ -31,9 +32,27 @@ public class UserServiceMongoDB implements UserService {
     }
 
     @Override
-    public boolean deleteById(String id) {
-        return false;
+    public List<User> all()
+    {
+        return userRepository.findAll();
     }
+
+
+    @Override
+    public User findById( String id )
+    {
+        Optional<User> optionalUser = userRepository.findById( id );
+        if ( optionalUser.isPresent() )
+        {
+            return optionalUser.get();
+        }
+        else
+        {
+            throw new UserNotFoundException();
+        }
+    }
+
+
 
 
 }

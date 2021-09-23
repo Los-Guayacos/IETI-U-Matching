@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping( "/v1/user" )
 public class UserController {
@@ -26,17 +28,17 @@ public class UserController {
     {
         return ResponseEntity.ok( userService.findByUsername( userName ) );
     }
-    /*
-    @PutMapping( "/{id}" )
-    public ResponseEntity<User> update(@RequestBody UserDto userDto, @PathVariable String id )
+    @GetMapping
+    public List<User> all()
     {
-        return ResponseEntity.ok( userService.update( userDto, id ) );
+        return userService.getAll();
     }
-    @DeleteMapping( "/{id}" )
-    public ResponseEntity<Boolean> delete( @PathVariable String id )
+
+    @GetMapping( "/{id}" )
+    public User findById( @PathVariable String id )
     {
-        return ResponseEntity.ok( userService.deleteById( id ) );
-    }*/
+        return userService.findById( id );
+    }
 
 
 }

@@ -9,6 +9,7 @@ public class UmatchingApp
     public static void main( String[] args )
     {
         SpringApplication.run(UmatchingApp.class,args);
+        System.out.println("The app is running...");
 
     }
 }

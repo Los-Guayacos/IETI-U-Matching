@@ -6,5 +6,7 @@ import guayacos.repository.document.User;
 public interface UserService {
 
     User create(UserDto userDto);
+    User findByUsername( String userName );
+    boolean deleteById( String id );
 
 }

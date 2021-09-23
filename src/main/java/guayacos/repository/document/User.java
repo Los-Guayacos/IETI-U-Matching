@@ -12,7 +12,7 @@ public class User {
 
     private String name;
     private String lastname;
-    private String username;
+    private String userName;
     private String passwordHash;
     @Indexed( unique = true )
     private String email;
@@ -25,7 +25,7 @@ public class User {
     public User() {
     }
     public User(UserDto userDto){
-        this.username= userDto.getUsername();
+        this.userName= userDto.getUsername();
         this.passwordHash= userDto.getPasswordHash();
         this.email=userDto.getEmail();
     }
@@ -54,12 +54,12 @@ public class User {
         this.lastname = lastname;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public String getPasswordHash() {

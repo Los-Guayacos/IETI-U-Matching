@@ -5,10 +5,7 @@ import guayacos.repository.document.User;
 import guayacos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping( "/v1/user" )
@@ -24,6 +21,22 @@ public class UserController {
     {
         return ResponseEntity.ok( userService.create( userDto ) );
     }
+    @GetMapping( "/{userName}" )
+    public ResponseEntity<User> findByUsername( @PathVariable String userName )
+    {
+        return ResponseEntity.ok( userService.findByUsername( userName ) );
+    }
+    /*
+    @PutMapping( "/{id}" )
+    public ResponseEntity<User> update(@RequestBody UserDto userDto, @PathVariable String id )
+    {
+        return ResponseEntity.ok( userService.update( userDto, id ) );
+    }
+    @DeleteMapping( "/{id}" )
+    public ResponseEntity<Boolean> delete( @PathVariable String id )
+    {
+        return ResponseEntity.ok( userService.deleteById( id ) );
+    }*/
 
 
 }

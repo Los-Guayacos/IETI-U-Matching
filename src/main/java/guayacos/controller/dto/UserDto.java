@@ -1,4 +1,4 @@
-package guayacos.dto;
+package guayacos.controller.dto;
 
 public class UserDto {
 

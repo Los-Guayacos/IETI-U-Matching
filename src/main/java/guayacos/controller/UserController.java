@@ -23,13 +23,13 @@ public class UserController {
     {
         return ResponseEntity.ok( userService.create( userDto ) );
     }
-    @GetMapping( "/{userName}" )
+    @GetMapping( "/user/{userName}" )
     public ResponseEntity<User> findByUsername( @PathVariable String userName )
     {
         return ResponseEntity.ok( userService.findByUsername( userName ) );
     }
     @GetMapping
-    public List<User> all()
+    public List<User> getAll()
     {
         return userService.getAll();
     }
@@ -38,6 +38,17 @@ public class UserController {
     public User findById( @PathVariable String id )
     {
         return userService.findById( id );
+    }
+    @PutMapping( "/{id}" )
+    public ResponseEntity<User> update( @RequestBody UserDto userDto, @PathVariable String id )
+    {
+        return ResponseEntity.ok( userService.update( userDto, id ) );
+    }
+
+    @DeleteMapping( "/{id}" )
+    public ResponseEntity<Boolean> delete( @PathVariable String id )
+    {
+        return ResponseEntity.ok( userService.deleteById( id ) );
     }
 
 

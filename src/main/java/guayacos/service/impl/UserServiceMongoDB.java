@@ -1,5 +1,6 @@
 package guayacos.service.impl;
 
+import guayacos.config.exception.UserNotFoundException;
 import guayacos.controller.dto.UserDto;
 import guayacos.repository.UserRepository;
 import guayacos.repository.document.User;
@@ -32,7 +33,7 @@ public class UserServiceMongoDB implements UserService {
     }
 
     @Override
-    public List<User> all()
+    public List<User> getAll()
     {
         return userRepository.findAll();
     }
@@ -51,8 +52,42 @@ public class UserServiceMongoDB implements UserService {
             throw new UserNotFoundException();
         }
     }
+    @Override
+    public User findByEmail( String email )
+            throws UserNotFoundException
+    {
+        Optional<User> optionalUser = userRepository.findByEmail( email );
+        if ( optionalUser.isPresent() )
+        {
+            return optionalUser.get();
+        }
+        else
+        {
+            throw new UserNotFoundException();
+        }
+    }
 
+    @Override
+    public User update(UserDto userDto, String id) {
+        if ( userRepository.findById( id ).isPresent() )
+        {
+            User user = userRepository.findById( id ).get();
+            user.update( userDto );
+            userRepository.save( user );
+            return user;
+        }
+        return null;
+    }
 
+    @Override
+    public boolean deleteById(String id) {
+        if ( userRepository.existsById( id ) )
+        {
+            userRepository.deleteById( id );
+            return true;
+        }
+        return false;
+    }
 
 
 }

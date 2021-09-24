@@ -1,34 +1,53 @@
 package guayacos.controller.dto;
 
 public class UserDto {
-
-    private String username;
+    private String name;
+    private String lastName;
+    private String userName;
     private String email;
-    private String passwordHash;
+    private String password;
 
     public UserDto() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String username) {
+        this.userName = username;
+    }
+
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

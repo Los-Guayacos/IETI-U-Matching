@@ -1,5 +1,6 @@
 package guayacos.config.exception;
 
+import guayacos.error.ErrorCodeEnum;
 import guayacos.error.InternalServerErrorException;
 import org.springframework.http.HttpStatus;
 

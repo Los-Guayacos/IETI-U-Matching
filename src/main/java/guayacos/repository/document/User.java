@@ -16,6 +16,7 @@ public class User {
     private String passwordHash;
     @Indexed( unique = true )
     private String email;
+    private String gender;
     private String address;
     private String age;
     private String university;
@@ -30,6 +31,7 @@ public class User {
         this.userName= userDto.getUserName();
         this.passwordHash= userDto.getPassword();
         this.email=userDto.getEmail();
+        this.gender=userDto.getGender();
     }
 
     public String getId() {
@@ -60,7 +62,7 @@ public class User {
         return userName;
     }
 
-    public void setUsername(String username) {
+    public void setUserName(String username) {
         this.userName = username;
     }
 
@@ -118,6 +120,14 @@ public class User {
 
     public void setSemester(String semester) {
         this.semester = semester;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public void update(UserDto userDto) {

@@ -23,11 +23,6 @@ public class UserController {
     {
         return ResponseEntity.ok( userService.create( userDto ) );
     }
-    @GetMapping( "/user/{userName}" )
-    public ResponseEntity<User> findByUsername( @PathVariable String userName )
-    {
-        return ResponseEntity.ok( userService.findByUsername( userName ) );
-    }
     @GetMapping
     public List<User> getAll()
     {
@@ -39,6 +34,22 @@ public class UserController {
     {
         return userService.findById( id );
     }
+    @GetMapping( "/username/{userName}" )
+    public ResponseEntity<User> findByUserName( @PathVariable String userName )
+    {
+        return ResponseEntity.ok( userService.findByUserName( userName ) );
+    }
+    @GetMapping("/email/{id}")
+    public User findByEmail(@PathVariable String id ){return userService.findByEmail(id);}
+
+    @GetMapping("/gender/hombre")
+
+    public List<User> findByGenderMan(){return userService.findByGenderMan();}
+
+    @GetMapping("/gender/mujer")
+
+    public List<User> findByGenderWoman(){return userService.findByGenderWoman();}
+
     @PutMapping( "/{id}" )
     public ResponseEntity<User> update( @RequestBody UserDto userDto, @PathVariable String id )
     {

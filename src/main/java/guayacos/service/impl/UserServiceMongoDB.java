@@ -24,13 +24,6 @@ public class UserServiceMongoDB implements UserService {
         return userRepository.save(new User(userDto));
     }
 
-    @Override
-    public User findByUsername(String userName) {
-
-        User user = userRepository.findByUserName(userName);
-        System.out.println(user);
-        return user;
-    }
 
     @Override
     public List<User> getAll()
@@ -53,6 +46,20 @@ public class UserServiceMongoDB implements UserService {
         }
     }
     @Override
+    public User findByUserName(String userName) throws  UserNotFoundException{
+
+        Optional<User> optionalUser = userRepository.findByUserName(userName);
+        System.out.println(optionalUser);
+        if (optionalUser.isPresent()){
+            return optionalUser.get();
+        }
+        else{
+            throw new UserNotFoundException();
+        }
+
+
+    }
+    @Override
     public User findByEmail( String email )
             throws UserNotFoundException
     {
@@ -65,6 +72,26 @@ public class UserServiceMongoDB implements UserService {
         {
             throw new UserNotFoundException();
         }
+    }
+    @Override
+    public List<User> findByGenderMan()
+            throws UserNotFoundException
+    {
+        List<User> optionalUser = userRepository.findByGender( "Hombre" );
+        return optionalUser;
+        /*if ( optionalUser.isPresent() )
+        {
+            return optionalUser.get();
+        }
+        else
+        {
+            throw new UserNotFoundException();
+        }*/
+    }
+    public List<User> findByGenderWoman()
+            throws UserNotFoundException {
+        List<User> optionalUser = userRepository.findByGender("Mujer");
+        return optionalUser;
     }
 
     @Override

@@ -1,9 +1,16 @@
 package guayacos.repository.document;
 
 import guayacos.controller.dto.UserDto;
+import guayacos.utils.RoleEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 @Document
 public class User {
@@ -22,6 +29,9 @@ public class User {
     private String university;
     private String carreer;
     private String semester;
+    private List<RoleEnum> roles;
+    private Date createdAt;
+
 
     public User() {
     }
@@ -29,9 +39,12 @@ public class User {
         this.name = userDto.getName();
         this.lastName = userDto.getLastName();
         this.userName= userDto.getUserName();
-        this.passwordHash= userDto.getPassword();
+        this.passwordHash= BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
         this.email=userDto.getEmail();
         this.gender=userDto.getGender();
+        this.createdAt = new Date();
+        this.roles = new ArrayList<>( Collections.singleton( RoleEnum.USER ) );
+
     }
 
     public String getId() {
@@ -130,12 +143,31 @@ public class User {
         this.gender = gender;
     }
 
+    public List<RoleEnum> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEnum> roles) {
+        this.roles = roles;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public void update(UserDto userDto) {
         this.name = userDto.getName();
         this.lastName = userDto.getLastName();
         this.userName = userDto.getUserName();
         this.email = userDto.getEmail();
-        this.passwordHash=userDto.getPassword();
+        if ( userDto.getPassword() != null )
+        {
+            this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
+        }
 
     }
 }

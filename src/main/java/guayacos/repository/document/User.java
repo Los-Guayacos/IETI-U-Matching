@@ -31,6 +31,9 @@ public class User {
     private String semester;
     private List<RoleEnum> roles;
     private Date createdAt;
+    private List<String> likes;
+    private List<String> LikesMe;
+    private List<String> matches;
 
 
     public User() {
@@ -159,6 +162,22 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public List<String> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<String> likes) {
+        this.likes = likes;
+    }
+
+    public List<String> getLikesme() {
+        return LikesMe;
+    }
+
+    public void setLikesme(List<String> likesme) {
+        LikesMe = likesme;
+    }
+
     public void update(UserDto userDto) {
         this.name = userDto.getName();
         this.lastName = userDto.getLastName();
@@ -169,5 +188,19 @@ public class User {
             this.passwordHash = BCrypt.hashpw( userDto.getPassword(), BCrypt.gensalt() );
         }
 
+    }
+    public void updateLikes(String newlike){
+        this.likes.add(newlike);
+    }
+    public void updateLikesMe(String newlikeme){
+        this.LikesMe.add(newlikeme);
+    }
+    public void updateMatches(String friend,boolean valid){
+        if (valid) {
+            this.matches.add(friend);
+        }
+        else{
+            this.matches.remove(friend);
+        }
     }
 }

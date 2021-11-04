@@ -63,8 +63,7 @@ public class UserServiceMongoDB implements UserService {
         List<User> users = new ArrayList<User>();
         try {
             Firestore db = FirestoreClient.getFirestore();
-            Query ref = db.collectionGroup("users").limitToLast(limit).orderBy("registrationDate",
-                    Direction.DESCENDING);
+            Query ref = db.collectionGroup("users");
             ApiFuture<QuerySnapshot> querySnapshot = ref.get();
             for (DocumentSnapshot user : querySnapshot.get().getDocuments()) {
                 User userRetrieved = user.toObject(User.class);
@@ -84,8 +83,7 @@ public class UserServiceMongoDB implements UserService {
             User currentUser = findUserById(userId);
             if (currentUser != null) {
                 Firestore db = FirestoreClient.getFirestore();
-                Query ref = db.collectionGroup("users").limitToLast(limit).orderBy("registrationDate",
-                        Direction.DESCENDING);
+                Query ref = db.collectionGroup("users");
                 ApiFuture<QuerySnapshot> querySnapshot = ref.get();
                 for (DocumentSnapshot user : querySnapshot.get().getDocuments()) {
                     User retrievedUser = user.toObject(User.class);

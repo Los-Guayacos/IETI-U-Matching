@@ -6,7 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-//import guayacos.model.entities.Message;
+import guayacos.model.entities.Message;
 
 public class ChatListener {
 
@@ -16,8 +16,8 @@ public class ChatListener {
     ValueEventListener listener = ref.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            //Message post = dataSnapshot.getValue(Message.class);
-            //System.out.println(post);
+            Message post = dataSnapshot.getValue(Message.class);
+            System.out.println(post);
         }
 
         @Override

@@ -25,16 +25,5 @@ public interface UserService {
     //Chat
     void sendMessage(Message message);
     List<Message> retrieveMessages(String userId, String receiver, int limit);
-/*
 
-    User findByUserName( String userName ) throws UserNotFoundException;
-    List<User> getAll();
-    User findById( String id ) throws UserNotFoundException;
-    User findByEmail( String email ) throws UserNotFoundException;
-    User update(UserDto userDto, String id);
-    boolean deleteById( String id );
-
-    List<User> findByGenderMan()throws UserNotFoundException;
-    List<User> findByGenderWoman()throws UserNotFoundException;
-*/
 }

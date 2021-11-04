@@ -1,5 +1,6 @@
 package guayacos.config;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.springframework.context.annotation.Configuration;

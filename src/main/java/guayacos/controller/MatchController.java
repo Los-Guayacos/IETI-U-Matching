@@ -6,9 +6,7 @@ import java.util.List;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 
-import guayacos.model.entities.Match;
-import guayacos.service.MatchService;
-import guayacos.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import guayacos.loger.Log;
+import guayacos.model.entities.Match;
+import guayacos.service.MatchService;
+import guayacos.service.UserService;
 
 
 @RestController

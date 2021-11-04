@@ -23,8 +23,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import guayacos.loger.Log;
 import guayacos.model.entities.Interest;
 import guayacos.model.entities.Match;
+import guayacos.model.entities.Message;
 import guayacos.model.entities.User;
 import guayacos.model.helpers.Filter;
 import guayacos.service.UserService;

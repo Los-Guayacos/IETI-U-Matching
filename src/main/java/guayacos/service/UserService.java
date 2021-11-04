@@ -1,7 +1,6 @@
 package guayacos.service;
 
-import guayacos.config.exception.UserNotFoundException;
-import guayacos.controller.dto.UserDto;
+import guayacos.model.entities.Message;
 import guayacos.model.entities.User;
 import guayacos.model.helpers.Filter;
 

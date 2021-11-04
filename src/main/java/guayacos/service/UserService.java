@@ -2,12 +2,21 @@ package guayacos.service;
 
 import guayacos.config.exception.UserNotFoundException;
 import guayacos.controller.dto.UserDto;
+import guayacos.model.entities.User;
+import guayacos.model.helpers.Filter;
 
 import java.util.List;
 
 public interface UserService {
+    //Crud USER
+    void createUser(User user);
+    List<User> fetchAll(int limit, String userId);
+    List<User> fetchCustom(int limit, String userId, Filter filters);
+    User findUserByEmail(String email);
+    User findUserById(String uid);
+    User updateUser(User user);
 /*
-    User create(UserDto userDto);
+
     User findByUserName( String userName ) throws UserNotFoundException;
     List<User> getAll();
     User findById( String id ) throws UserNotFoundException;

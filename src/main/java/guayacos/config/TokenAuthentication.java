@@ -1,5 +1,5 @@
 package guayacos.config;
-
+/*
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -49,4 +49,4 @@ public class TokenAuthentication extends AbstractAuthenticationToken
                 Collectors.toList() );
     }
 
-}
+}*/

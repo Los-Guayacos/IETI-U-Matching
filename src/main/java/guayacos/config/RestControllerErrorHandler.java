@@ -1,5 +1,5 @@
 package guayacos.config;
-
+/*
 import guayacos.config.exception.ServerErrorResponseDto;
 import guayacos.error.InternalServerErrorException;
 import org.springframework.http.HttpStatus;
@@ -32,4 +32,4 @@ class RestControllerErrorHandler
     {
         return new ResponseEntity( exception.getServerErrorResponseDto(), exception.getHttpStatus() );
     }
-}
+}*/

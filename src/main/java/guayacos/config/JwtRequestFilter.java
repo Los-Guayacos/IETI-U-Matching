@@ -1,5 +1,5 @@
 package guayacos.config;
-
+/*
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -98,3 +98,4 @@ public class JwtRequestFilter extends OncePerRequestFilter
         }
     }
 }
+*/

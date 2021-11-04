@@ -15,6 +15,13 @@ public interface UserService {
     User findUserByEmail(String email);
     User findUserById(String uid);
     User updateUser(User user);
+
+    //Rating
+    void rateUser(String rater, String userId, int rate);
+
+    //Matching
+    boolean likeUser(String liker, String userId);
+    boolean verifyMatch(User liker, User userId);
 /*
 
     User findByUserName( String userName ) throws UserNotFoundException;

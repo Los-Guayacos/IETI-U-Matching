@@ -224,6 +224,128 @@ public class UserServiceMongoDB implements UserService {
         }
         return userUpdated;
     }
+    @Override
+    public void rateUser(String rater, String userId, int rate) {
+        try {
+            User user = findUserById(userId);
+            if (user != null) {
+                Map<String, Integer> ratings = user.getRatings() != null ? user.getRatings()
+                        : new HashMap<String, Integer>();
+                ratings.put(rater, rate);
+                // Update local
+                user.setRatings(ratings);
+                user.setTotalRatings(ratings.size());
+                user.setRating(user.getRating() / ratings.size());
+                // Persist
+                updateUser(user);
+            } else {
+                System.out.println("Usuario no encontrado");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public boolean likeUser(String liker, String userId) {
+        boolean matched = false;
+        try {
+            User user = findUserById(liker);
+            User userToLike = findUserById(userId);
+            if (user != null && userToLike != null) {
+                List<String> likes = user.getLikes() != null ? user.getLikes() : new ArrayList<String>();
+                if (!likes.contains(userId)) {
+                    likes.add(userId);
+                    user.setLikes(likes);
+                    updateUser(user);
+                } else {
+                    System.out.println("El like ya esta registrado");
+                }
+                List<String> givenLikes = userToLike.getReceivedLikes() != null ? userToLike.getReceivedLikes()
+                        : new ArrayList<String>();
+                if (!givenLikes.contains(liker)) {
+                    givenLikes.add(liker);
+                    userToLike.setReceivedLikes(givenLikes);
+                    updateUser(userToLike);
+                }
+                matched = verifyMatch(user, userToLike);
+            } else {
+                System.out.println("El usuario no existe");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return matched;
+    }
+
+    @Override
+    public boolean verifyMatch(User user1, User user2) {
+        boolean matched = false;
+        try {
+            if (user1 != null && user2 != null) {
+                List<String> likesReceived1 = user1.getLikes() != null ? user1.getReceivedLikes()
+                        : new ArrayList<String>();
+                if (likesReceived1.contains(user2.getUid())) {
+                    matched = true;
+                    System.out.println("It's a Match!");
+                    // Agregamos el match a cada uno respectivamente
+                    List<Match> matches1 = user1.getMatches() != null ? user1.getMatches() : new ArrayList<Match>();
+                    List<Match> matches2 = user2.getMatches() != null ? user2.getMatches() : new ArrayList<Match>();
+                    // No agregar match iguales
+                    boolean exists = false;
+                    for (Match match : matches1) {
+                        if (match.getUserId().equals(user2.getUid())) {
+                            exists = true;
+                            System.out.println("Existe el match");
+                        }
+                    }
+
+                    if (!exists) {
+                        System.out.println("Updated matches user 1");
+                        matches1.add(new Match(user2.getUid(), new Date(), user2.getPictures().get(0).getUrl(),
+                                user2.getFullName()));
+                    }
+
+                    exists = false;
+
+                    for (Match match : matches2) {
+                        if (match.getUserId().equals(user1.getUid())) {
+                            exists = true;
+                        }
+                    }
+                    if (!exists) {
+                        System.out.println("Updated matches user 2");
+                        matches2.add(new Match(user1.getUid(), new Date(), user1.getPictures().get(0).getUrl(),
+                                user1.getFullName()));
+                    }
+
+                    // Creamos la nueva sala de chat
+                    String idRoom = user1.getUid() + "_" + user2.getUid();
+                    user1.addNewRoom(user2.getUid(), idRoom);
+                    user2.addNewRoom(user1.getUid(), idRoom);
+                    // Acutalizar usuarios localmente
+                    user1.setMatches(matches1);
+                    user2.setMatches(matches2);
+                    // Actualizamos los usuarios globalmente
+                    updateUser(user1);
+                    updateUser(user2);
+                } else {
+                    System.out.println("Not matched");
+                }
+            }
+
+        } catch (Exception e) {
+            try {
+                Log.addLine(e.getMessage());
+                System.out.println(e.getMessage());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+        return matched;
+    }
 /*
     private final UserRepository userRepository;
     public UserServiceMongoDB(@Autowired UserRepository userRepository){

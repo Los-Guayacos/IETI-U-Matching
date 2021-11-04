@@ -6,7 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-//import edu.escuelaing.arsw.model.entities.Message;
+//import guayacos.model.entities.Message;
 
 public class ChatListener {
 

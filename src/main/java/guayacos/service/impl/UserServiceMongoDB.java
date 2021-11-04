@@ -346,6 +346,67 @@ public class UserServiceMongoDB implements UserService {
 
         return matched;
     }
+
+    @Override
+    public void sendMessage(Message message) {
+        try {
+            User transmitter = findUserById(message.getAuthorId());
+            User receiver = findUserById(message.getReceiver());
+
+            if (transmitter != null && receiver != null) {
+                String idRoom = transmitter.getRooms().get(receiver.getUid());
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference rootRef = database.getReference("chat/rooms").child(idRoom).push();
+                rootRef.setValueAsync(message);
+
+            } else {
+                System.out.println("Uno de los usuarios no existe");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Message> retrieveMessages(String userId, String receiver, int limit) {
+        List<Message> messages = new ArrayList<Message>();
+        AtomicBoolean done = new AtomicBoolean(false);
+        try {
+            User user = findUserById(userId);
+            if (user != null) {
+                String idRoom = user.getRooms().get(receiver);
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference("/chat/rooms").child(idRoom);
+                ref.limitToLast(limit).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onCancelled(DatabaseError arg0) {
+                        System.out.println("Canceled!!");
+                        done.set(true);
+                    }
+
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            messages.add(child.getValue(Message.class));
+                        }
+                        done.set(true);
+                    }
+                });
+            } else {
+                System.out.println("El usuario no existe");
+                done.set(true);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        while (!done.get())
+            ;
+
+        return messages;
+    }
 /*
     private final UserRepository userRepository;
     public UserServiceMongoDB(@Autowired UserRepository userRepository){

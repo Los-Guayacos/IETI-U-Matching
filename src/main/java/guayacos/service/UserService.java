@@ -22,6 +22,10 @@ public interface UserService {
     //Matching
     boolean likeUser(String liker, String userId);
     boolean verifyMatch(User liker, User userId);
+
+    //Chat
+    void sendMessage(Message message);
+    List<Message> retrieveMessages(String userId, String receiver, int limit);
 /*
 
     User findByUserName( String userName ) throws UserNotFoundException;

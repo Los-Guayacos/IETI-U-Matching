@@ -9,7 +9,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.springframework.stereotype.Service;
 
-import edu.escuelaing.arsw.chat.components.ChatListener;
+//import edu.escuelaing.arsw.chat.components.ChatListener;
 
 @Service
 public class FirebaseConfiguration {
@@ -27,7 +27,7 @@ public class FirebaseConfiguration {
                 FirebaseApp.initializeApp(options);
             }
 
-            ChatListener chatListener = new ChatListener();
+            //ChatListener chatListener = new ChatListener();
 
         } catch (Exception e) {
             e.printStackTrace();

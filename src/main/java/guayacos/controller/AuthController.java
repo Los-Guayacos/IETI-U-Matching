@@ -3,7 +3,6 @@ package guayacos.controller;
 import guayacos.config.exception.InvalidCredentialsException;
 import guayacos.controller.dto.LoginDto;
 import guayacos.controller.dto.TokenDto;
-import guayacos.repository.document.User;
 import guayacos.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,7 +23,7 @@ import static guayacos.utils.Constans.TOKEN_DURATION_MINUTES;
 @RestController
 @RequestMapping( "v1/auth" )
 public class AuthController {
-
+/*
 
 
     @Value("${app.secret}")
@@ -62,5 +61,5 @@ public class AuthController {
         expirationDate.add(Calendar.MINUTE, TOKEN_DURATION_MINUTES);
         String token = generateToken(user, expirationDate.getTime());
         return new TokenDto(token, expirationDate.getTime());
-    }
+    }*/
 }

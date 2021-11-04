@@ -1,7 +1,6 @@
 package guayacos.controller;
 
 import guayacos.controller.dto.UserDto;
-import guayacos.repository.document.User;
 import guayacos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import java.util.List;
 @RequestMapping( "/v1/user" )
 public class UserController {
 
-    private final UserService userService;
+    /*private final UserService userService;
     public UserController( @Autowired UserService userService )
     {
         this.userService = userService;
@@ -62,7 +61,7 @@ public class UserController {
     public ResponseEntity<Boolean> delete( @PathVariable String id )
     {
         return ResponseEntity.ok( userService.deleteById( id ) );
-    }
+    }*/
 
 
 }

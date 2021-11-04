@@ -2,8 +2,7 @@ package guayacos.service.impl;
 
 import guayacos.config.exception.UserNotFoundException;
 import guayacos.controller.dto.UserDto;
-import guayacos.repository.UserRepository;
-import guayacos.repository.document.User;
+//import guayacos.repository.UserRepository;
 import guayacos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public class UserServiceMongoDB implements UserService {
-
+/*
     private final UserRepository userRepository;
     public UserServiceMongoDB(@Autowired UserRepository userRepository){
         this.userRepository=userRepository;
@@ -78,7 +77,7 @@ public class UserServiceMongoDB implements UserService {
             throws UserNotFoundException
     {
         List<User> optionalUser = userRepository.findByGender( "Hombre" );
-        return optionalUser;
+        return optionalUser;*/
         /*if ( optionalUser.isPresent() )
         {
             return optionalUser.get();
@@ -87,7 +86,7 @@ public class UserServiceMongoDB implements UserService {
         {
             throw new UserNotFoundException();
         }*/
-    }
+    /*}
     public List<User> findByGenderWoman()
             throws UserNotFoundException {
         List<User> optionalUser = userRepository.findByGender("Mujer");
@@ -114,7 +113,7 @@ public class UserServiceMongoDB implements UserService {
             return true;
         }
         return false;
-    }
+    }*/
 
 
 }

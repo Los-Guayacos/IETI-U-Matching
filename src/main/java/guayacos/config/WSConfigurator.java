@@ -1,6 +1,5 @@
 package guayacos.config;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,6 @@ import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-
 
 @Configuration
 @EnableWebSocketMessageBroker
@@ -28,8 +26,8 @@ public class WSConfigurator implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry
-                .addEndpoint("/ws")
-                .setAllowedOrigins("*")
+                .addEndpoint("/wsk")
+                .setAllowedOrigins("http://localhost:3000/", "https://umatching-d13c4.firebaseapp.com/")
                 .withSockJS();
     }
 
